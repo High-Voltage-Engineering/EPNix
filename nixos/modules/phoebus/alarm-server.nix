@@ -41,6 +41,17 @@ in {
       default = false;
     };
 
+    extraArgs = lib.mkOption {
+      description = ''
+        Extra options to pass to alarm server on startup
+      '';
+
+      default = [];
+      type = with lib.types; listOf str;
+
+      example = ["-import" "myImport.xml"];
+    };
+
     settings = lib.mkOption {
       description = ''
         Configuration for the Phoebus Alarm Server.
@@ -180,7 +191,8 @@ in {
               "-noshell"
               "-settings /etc/${configLocation}"
             ]
-            ++ (lib.optional cfg.createTopics "-create_topics");
+            ++ (lib.optional cfg.createTopics "-create_topics")
+            ++ cfg.extraArgs;
         in "${lib.getExe pkgs.epnix.phoebus-alarm-server} ${lib.concatStringsSep " " args}";
         DynamicUser = true;
         StateDirectory = "phoebus-alarm-server";
