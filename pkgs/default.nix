@@ -3,6 +3,8 @@ epnixLib: inputs: final: prev: let
   # From prev, else it somehow causes an infinite recursion
   inherit (prev) recurseIntoAttrs;
   recurseExtensible = f: recurseIntoAttrs (final.lib.makeExtensible f);
+
+  inherit (final.epnix.support) pvxs;
 in
   recurseIntoAttrs {
     inherit epnixLib;
@@ -18,6 +20,17 @@ in
           pyepics = final.callPackage ./epnix/python-modules/pyepics {};
           recceiver = final.callPackage ./epnix/tools/channel-finder/recceiver {};
           scanf = final.callPackage ./epnix/tools/scanf {};
+          epicscorelibs = final.callPackage ./epnix/python-modules/epicscorelibs {};
+
+          setuptools-dso = prev.setuptools-dso.overrideAttrs (old: rec {
+            name = "${old.pname}-${version}";
+            version = "2.11";
+
+            src = old.src.override {
+              inherit version;
+              hash = "sha256-lT5mp0TiHbvkrXPiK5/uLke65znya8Y6s3RzpFuXVFY=";
+            };
+          });
         })
       ];
 
