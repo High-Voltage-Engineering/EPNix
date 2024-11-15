@@ -25,6 +25,7 @@ in
             inherit pvxs;
           };
           aioca = final.callPackage ./epnix/python-modules/aioca/default.nix {};
+          epicsdbbuilder = final.callPackage ./epnix/python-modules/epicsdbbuilder {};
 
           setuptools-dso = prev.setuptools-dso.overrideAttrs (old: rec {
             name = "${old.pname}-${version}";
