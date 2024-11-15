@@ -24,6 +24,7 @@ in
           pvxslibs = final.callPackage ./epnix/python-modules/pvxslibs {
             inherit pvxs;
           };
+          aioca = final.callPackage ./epnix/python-modules/aioca/default.nix {};
 
           setuptools-dso = prev.setuptools-dso.overrideAttrs (old: rec {
             name = "${old.pname}-${version}";
@@ -92,7 +93,7 @@ in
 
       channel-finder-service = callPackage ./epnix/tools/channel-finder/service {};
 
-      inherit (final.python3Packages) lewis pyepics;
+      inherit (final.python3Packages) lewis pyepics aioca;
       inherit (callPackage ./epnix/tools/lewis/lib.nix {}) mkLewisSimulator;
 
       pcas = callPackage ./epnix/tools/pcas {};
