@@ -3,6 +3,8 @@ epnixLib: inputs: final: prev: let
   # From prev, else it somehow causes an infinite recursion
   inherit (prev) recurseIntoAttrs;
   recurseExtensible = f: recurseIntoAttrs (final.lib.makeExtensible f);
+
+  inherit (final.epnix.support) pvxs;
 in
   recurseIntoAttrs {
     inherit epnixLib;
@@ -18,6 +20,23 @@ in
           pyepics = final.callPackage ./epnix/python-modules/pyepics {};
           recceiver = final.callPackage ./epnix/tools/channel-finder/recceiver {};
           scanf = final.callPackage ./epnix/tools/scanf {};
+          epicscorelibs = final.callPackage ./epnix/python-modules/epicscorelibs {};
+          pvxslibs = final.callPackage ./epnix/python-modules/pvxslibs {
+            inherit pvxs;
+          };
+          aioca = final.callPackage ./epnix/python-modules/aioca/default.nix {};
+          epicsdbbuilder = final.callPackage ./epnix/python-modules/epicsdbbuilder {};
+          softioc = final.callPackage ./epnix/python-modules/softioc {};
+
+          setuptools-dso = prev.setuptools-dso.overrideAttrs (old: rec {
+            name = "${old.pname}-${version}";
+            version = "2.11";
+
+            src = old.src.override {
+              inherit version;
+              hash = "sha256-lT5mp0TiHbvkrXPiK5/uLke65znya8Y6s3RzpFuXVFY=";
+            };
+          });
         })
       ];
 
@@ -76,7 +95,7 @@ in
 
       channel-finder-service = callPackage ./epnix/tools/channel-finder/service {};
 
-      inherit (final.python3Packages) lewis pyepics;
+      inherit (final.python3Packages) lewis pyepics aioca softioc;
       inherit (callPackage ./epnix/tools/lewis/lib.nix {}) mkLewisSimulator;
 
       pcas = callPackage ./epnix/tools/pcas {};
