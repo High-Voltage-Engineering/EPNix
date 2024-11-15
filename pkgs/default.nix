@@ -21,6 +21,9 @@ in
           recceiver = final.callPackage ./epnix/tools/channel-finder/recceiver {};
           scanf = final.callPackage ./epnix/tools/scanf {};
           epicscorelibs = final.callPackage ./epnix/python-modules/epicscorelibs {};
+          pvxslibs = final.callPackage ./epnix/python-modules/pvxslibs {
+            inherit pvxs;
+          };
 
           setuptools-dso = prev.setuptools-dso.overrideAttrs (old: rec {
             name = "${old.pname}-${version}";
