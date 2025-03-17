@@ -6,6 +6,7 @@
   ./modules/phoebus/alarm-logger.nix
   ./modules/phoebus/alarm-server.nix
   ./modules/phoebus/client.nix
+  ./modules/phoebus/scan-server.nix
   ./modules/phoebus/olog.nix
   ./modules/phoebus/save-and-restore.nix
 ]
