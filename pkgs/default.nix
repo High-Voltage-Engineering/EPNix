@@ -96,6 +96,21 @@ in
 
       pcas = callPackage ./epnix/tools/pcas {};
 
+      oac-tree = callPackage ./epnix/tools/oac-tree/oac-tree {};
+      oac-tree-gui = callPackage ./epnix/tools/oac-tree/oac-tree-gui {};
+      oac-tree-server = callPackage ./epnix/tools/oac-tree/oac-tree-server {};
+      oac-tree-epics = callPackage ./epnix/tools/oac-tree/oac-tree-epics {};
+      oac-tree-gui-full = final.epnix.oac-tree-gui.override {plugins = with final.epnix; [oac-tree-epics];};
+
+      sup-epics = callPackage ./epnix/tools/oac-tree/sup-epics {};
+      sup-protocol = callPackage ./epnix/tools/oac-tree/sup-protocol {};
+      sup-di = callPackage ./epnix/tools/oac-tree/sup-di {};
+      sup-dto = callPackage ./epnix/tools/oac-tree/sup-dto {};
+      sup-gui-core = callPackage ./epnix/tools/oac-tree/sup-gui-core {};
+      sup-gui-extra = callPackage ./epnix/tools/oac-tree/sup-gui-extra {};
+      sup-mvvm = callPackage ./epnix/tools/oac-tree/sup-mvvm {};
+      sup-utils = callPackage ./epnix/tools/oac-tree/sup-utils {};
+
       phoebus = callPackage ./epnix/tools/phoebus/client {};
       phoebus-unwrapped = callPackage ./epnix/tools/phoebus/client-unwrapped {
         jdk = prev.jdk21;
