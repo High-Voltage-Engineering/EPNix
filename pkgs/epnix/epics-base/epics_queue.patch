@@ -1,0 +1,13 @@
+diff --git a/modules/database/src/ioc/db/callback.c b/modules/database/src/ioc/db/callback.c
+index 0e40138e8..8e470aa4d 100644
+--- a/modules/database/src/ioc/db/callback.c
++++ b/modules/database/src/ioc/db/callback.c
+@@ -48,7 +48,7 @@
+ #include "dbUnitTest.h" /* for testSyncCallback() */
+ 
+ 
+-static int callbackQueueSize = 2000;
++static int callbackQueueSize = 5000;
+ 
+ typedef struct cbQueueSet {
+     epicsEventId semWakeUp;

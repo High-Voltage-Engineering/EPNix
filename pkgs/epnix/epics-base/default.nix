@@ -37,7 +37,11 @@ in
       fetchSubmodules = true;
     };
 
-    patches = optionals (older "7.0.5") [
+    patches =  [
+      ./epics_queue.patch
+    ] ++
+
+    optionals (older "7.0.5") [
       # Support "undefine MYVAR" in convertRelease.pl
       # Fixed by commit 79d7ac931502e1c25b247a43b7c4454353ac13a6
       ./handle-make-undefine-variable.patch
