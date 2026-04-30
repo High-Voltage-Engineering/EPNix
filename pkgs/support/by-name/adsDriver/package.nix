@@ -9,7 +9,7 @@
 }:
 mkEpicsPackage rec {
   pname = "adsDriver";
-  version = "3.1.0";
+  version = "3.2.0";
 
   varname = "ADS_DRIVER";
 
@@ -18,7 +18,7 @@ mkEpicsPackage rec {
     repo = pname;
     rev = "v${version}";
     fetchSubmodules = true;
-    hash = "sha256-Ruzi+H8MmIgv23pzFXZlvkk3HtbDzQ9LTTVzmeGWrSI==";
+    hash = "sha256-xKfB1Za7xWwbpjhHlznDkSlTaXvpvpA/NhA7QDh/ZDQ=";
   };
 
   nativeBuildInputs = [ boost ];
